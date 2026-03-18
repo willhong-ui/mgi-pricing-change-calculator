@@ -61,7 +61,7 @@ export default function App() {
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         <InputPanel inputs={inputs} onChange={handleInputChange} />
         <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-          <div style={{ height: 450, flexShrink: 0 }}>
+          <div style={{ height: 450, flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
             <ChartPanel output={output} />
           </div>
           <DetailedProjectionsTable output={output} inputs={inputs} />
