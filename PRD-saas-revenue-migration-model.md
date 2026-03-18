@@ -531,7 +531,52 @@ type ModelOutput = {
 
 ---
 
-## 12. Out of Scope (v1)
+## 12. Detailed Projections Table
+
+A reactive data table displayed below the chart panel, updating on every slider change alongside the charts and KPI cards.
+
+### Section Title
+`DETAILED PROJECTIONS` — small, all-caps, muted label above the table (matching the chart section title style)
+
+### Columns
+
+| Column | Header | Format | Color |
+|--------|--------|--------|-------|
+| Row label | — | Base, Y1, Y2, Y3, Y4, Y5 | Bold |
+| Seats | `Seats` | Plain integer with comma (e.g. `10,000`) | Default |
+| Per-seat price | `$/Seat` | Dollar format (e.g. `$1,200`) | Default |
+| Seat Revenue | `Seat Rev` | Abbreviated (e.g. `$12.0M`, `$400K`) | Blue `#6B9FD4` |
+| Agent Revenue | `Agent` | Abbreviated (e.g. `$400K`, `$4.6M`) | Purple `#9B59B6` |
+| Consumption Revenue | `Usage` | Abbreviated (e.g. `$320K`, `$1.7M`) | Green `#27AE60` |
+| Platform Revenue | `Platform` | Abbreviated (e.g. `$4.5M`, `$14.9M`) | Orange `#F5A623` |
+| Outcome Revenue | `Outcome` | Abbreviated (e.g. `$120K`, `$502K`) | Red `#E74C3C` |
+| Total Revenue | `Total` | Abbreviated, **bold** (e.g. `$18.5M`) | Default, bold |
+| Year-over-year growth | `YoY %` | `—` for Base row; `+54.3%` green for all other rows | Green |
+| Seat percentage | `Seat %` | Percentage (e.g. `100%`, `71%`) | Purple `#8B5CF6` |
+
+### Abbreviation Rules
+```
+≥ 1,000,000  → $X.XM   (e.g. $12.0M, $4.6M)
+≥ 1,000      → $XXXK   (e.g. $400K, $172K)
+< 1,000      → $XXX    (e.g. $502)
+```
+
+### Row Behavior
+- **Base row:** YoY% shows `—`, Seat% shows `100%`
+- **Y1–Y5 rows:** YoY% shows green `+X.X%` delta vs prior year
+- All values update reactively as sliders are dragged
+
+### Layout
+- Full width below the chart panel
+- Light gray header row
+- Subtle alternating row backgrounds (white / very light gray) for readability
+- Right-align all numeric columns
+- Left-align row labels (Base, Y1, Y2, Y3, Y4, Y5)
+
+---
+
+## 13. Out of Scope (v1)
+
 
 - User accounts / saved models
 - Multi-company comparison
@@ -542,7 +587,7 @@ type ModelOutput = {
 
 ---
 
-## 13. Acceptance Criteria
+## 14. Acceptance Criteria
 
 - [ ] All 21 sliders render with correct ranges and default (Bear Case) values
 - [ ] Dragging any slider instantly updates all 4 KPI cards and all chart tabs
@@ -556,4 +601,10 @@ type ModelOutput = {
 - [ ] Y5 Revenue delta vs Base shows correct ▲/▼ with correct percentage
 - [ ] Export CSV downloads valid CSV with all 6 rows and correct values
 - [ ] Export JSON downloads valid JSON with full inputs + outputs
-- [ ] No layout breaks at 1280px, 1440px, and 1920px viewport widths
+- [ ] Detailed Projections table renders below chart panel with all 11 columns
+- [ ] Table updates reactively on every slider change
+- [ ] Base row shows `—` for YoY% and `100%` for Seat%
+- [ ] Revenue columns are correctly color-coded per stream
+- [ ] Abbreviation formatting correct: $X.XM for millions, $XXXK for thousands
+- [ ] Total column is bold
+- [ ] Seat% column is purple

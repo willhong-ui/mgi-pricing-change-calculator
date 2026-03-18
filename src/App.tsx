@@ -8,6 +8,7 @@ import ScenarioTabs from './components/ScenarioTabs';
 import KpiCards from './components/KpiCards';
 import InputPanel from './components/InputPanel';
 import ChartPanel from './components/ChartPanel';
+import DetailedProjectionsTable from './components/DetailedProjectionsTable';
 
 const PRESET_MAP: Record<Exclude<Scenario, 'custom'>, ModelInputs> = {
   bear: BEAR_CASE,
@@ -59,7 +60,12 @@ export default function App() {
 
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         <InputPanel inputs={inputs} onChange={handleInputChange} />
-        <ChartPanel output={output} />
+        <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+          <div style={{ height: 450, flexShrink: 0 }}>
+            <ChartPanel output={output} />
+          </div>
+          <DetailedProjectionsTable output={output} inputs={inputs} />
+        </div>
       </div>
     </div>
   );
